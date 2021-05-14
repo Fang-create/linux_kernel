@@ -1360,6 +1360,10 @@ struct task_struct * __cpuinit fork_idle(int cpu)
  * It copies the process, and if successful kick-starts
  * it and waits for it to finish using the VM if required.
  */
+// 应用程序调用fork(), 进入系统调用，---> sys_fork()---> do_fork(SIGCHLD, regs.spu, &regs, 0, NULL, NULL); 
+// 线程创建与进程创建一致，只是在调用clone()的时候需要传递的一些参数标志来指明需要共享的资源， 其实线程就是进程，只是共享资源而已，使用的底层结构也是task_struct()
+
+
 long do_fork(unsigned long clone_flags,
 	      unsigned long stack_start,
 	      struct pt_regs *regs,
